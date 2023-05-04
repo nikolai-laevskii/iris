@@ -26,7 +26,7 @@ jobs:
     - name: Set up Go 1.x
       uses: actions/setup-go@v4
       with:
-        cache: false
+        cache: true
         go-version: ${{ matrix.go_version }}
         cache-dependency-path: './go.sum'
 
@@ -35,14 +35,14 @@ jobs:
         echo "$(go env GOMODCACHE)";
         echo "$(go env GOCACHE)"
 
-    - name: Cache Go dependencies
-      uses: actions/cache@v3
-      with:
-        key: ${{ runner.os }}-go-${{ matrix.go-version }}-${{ hashFiles('./go.sum') }}
-        restore-keys: ${{ runner.os }}-go-${{ matrix.go-version }}-
-        path: |
-          /home/runner/go/pkg/mod
-          /home/runner/.cache/go-build
+    #- name: Cache Go dependencies
+    #  uses: actions/cache@v3
+    #  with:
+    #    key: ${{ runner.os }}-go-${{ matrix.go-version }}-${{ hashFiles('./go.sum') }}
+    #    restore-keys: ${{ runner.os }}-go-${{ matrix.go-version }}-
+    #    path: |
+    #      /home/runner/go/pkg/mod
+    #      /home/runner/.cache/go-build
 
     - name: Test
       run: go test -v ./...
