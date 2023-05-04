@@ -27,6 +27,7 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: ${{ matrix.go_version }}
+        cache-dependency-path: './go.sum'
 
     - name: Verify go dependency paths
       run: |
@@ -36,7 +37,7 @@ jobs:
     - name: Cache Go dependencies
       uses: actions/cache@v3
       with:
-        key: ${{ runner.os }}-go-${{ matrix.go-version }}-${{ hashFiles('**/go.sum') }}
+        key: ${{ runner.os }}-go-${{ matrix.go-version }}-${{ hashFiles('./go.sum') }}
         restore-keys: ${{ runner.os }}-go-${{ matrix.go-version }}-
         path: |
           /home/runner/go/pkg/mod
