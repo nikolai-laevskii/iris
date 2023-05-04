@@ -26,6 +26,7 @@ jobs:
     - name: Set up Go 1.x
       uses: actions/setup-go@v4
       with:
+        cache: false
         go-version: ${{ matrix.go_version }}
         cache-dependency-path: './go.sum'
 
